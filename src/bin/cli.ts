@@ -1,6 +1,7 @@
 //env-node
 
-const program = require('commander');
+import program from 'commander';
+import createProject from '../scripts/create-project';
 
 const packageInfo = require('../../package.json');
 
@@ -12,7 +13,7 @@ program
   .command('create')
   .description('创建项目')
   .action(() => {
-    console.log('创建项目');
+    createProject();
   });
 
 program.parse(process.argv);
