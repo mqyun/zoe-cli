@@ -1,7 +1,7 @@
 //env-node
 
 import program from 'commander';
-import createProject from '../scripts/create-project';
+import createProject from '../scripts/create-project/create-project';
 
 const packageInfo = require('../../package.json');
 

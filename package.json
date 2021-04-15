@@ -1,8 +1,8 @@
 {
-  "name": "xymm-cli",
-  "version": "0.0.10",
+  "name": "zoe-cli",
+  "version": "1.0.0",
   "bin": {
-    "xymmCli": "./lib/bin/cli.js"
+    "zoeCli": "./lib/bin/cli.js"
   },
   "scripts": {
     "test": "node ./lib/bin/cli.js"

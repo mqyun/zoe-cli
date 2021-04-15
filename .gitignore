@@ -6,7 +6,6 @@ demo/node_modules
 demo/localBuild
 /npm-debug.log*
 /yarn-error.log
-/package-lock.json
 
 # production
 /dist
