@@ -1,7 +1,10 @@
 //env-node
 
 import program from 'commander';
+
 import createProject from '../scripts/create-project/create-project';
+import { ModeEnum } from '../declaration/global-declaration';
+import doPack from '../scripts/do-pack/do-pack';
 
 const packageInfo = require('../../package.json');
 
@@ -14,6 +17,26 @@ program
   .description('创建项目')
   .action(() => {
     createProject();
+  });
+
+program
+  .command('start')
+  .description('启动项目')
+  .action(() => {
+    console.log('项目启动中……');
+    doPack({
+      mode: ModeEnum.DEV
+    });
+  });
+
+program
+  .command('build')
+  .description('构建项目')
+  .action(() => {
+    console.log('项目构建中……');
+    doPack({
+      mode: ModeEnum.PRO
+    });
   });
 
 program.parse(process.argv);

@@ -1,4 +1,4 @@
-import projectTemplateGitUrlList from "../../config/global/project-template-git";
+import projectTemplateGitUrlList from '../../config/global/project-template-git';
 
 // 创建项目终端交互内容
 export const promptList = [

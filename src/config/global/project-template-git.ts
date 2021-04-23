@@ -1,3 +1,6 @@
+/**
+ * @description 项目模板 git 地址
+ */
 const projectTemplateGitUrlList: {
   typescript: string;
   javascript: string;

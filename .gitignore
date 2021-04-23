@@ -11,6 +11,7 @@ demo/localBuild
 /dist
 /es
 /lib
+/demo/*/build
 
 # misc
 .DS_Store
