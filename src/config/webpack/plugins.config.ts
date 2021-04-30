@@ -1,7 +1,8 @@
+import webpack from 'webpack';
 import WebpackBar from 'webpackbar';
 import { CleanWebpackPlugin } from 'clean-webpack-plugin';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
-import webpack from 'webpack';
+import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 
 const packageInfo = require('../../../package.json');
 
@@ -14,5 +15,6 @@ export default [
   new HtmlWebpackPlugin({
     title: 'zoe app'
   }),
-  new webpack.HotModuleReplacementPlugin({})
+  new webpack.HotModuleReplacementPlugin({}),
+  new MiniCssExtractPlugin()
 ];

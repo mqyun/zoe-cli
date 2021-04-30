@@ -1,4 +1,4 @@
-import {ModeEnum} from '../../declaration/global-declaration';
+import { ModeEnum } from '../../declaration/global-declaration';
 
 class GlobalStore {
   /**

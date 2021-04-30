@@ -4,7 +4,7 @@ import WebpackDevServer from 'webpack-dev-server';
 import { ModeEnum } from '../../declaration/global-declaration';
 import configuration from '../../config/webpack/webpack.config';
 import resolveApp from '../../utils/resolveApp';
-import globalStore from '../../config/global/gobal-store';
+import globalStore from '../../config/global/global-store';
 
 interface IDoPackParams {
   mode: ModeEnum;

@@ -1,3 +1,4 @@
+import { Configuration } from 'webpack';
 import { ModeEnum } from './global-declaration';
 
 /**
@@ -15,6 +16,9 @@ export interface ICustomConfig {
 
   /** dev server 配置 */
   devServerOption?: any;
+
+  /** webpack alias 配置 */
+  alias?: Configuration['resolve']['alias'];
 }
 
 /**

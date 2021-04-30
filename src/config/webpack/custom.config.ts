@@ -3,7 +3,7 @@ import fs from 'fs';
 import resolveApp from '../../utils/resolveApp';
 import { customConfigFileName } from '../global/global-config';
 import { ICustomConfig, ICustomConfigFileExport } from '../../declaration/custom-config-declaration';
-import globalStore from '../global/gobal-store';
+import globalStore from '../global/global-store';
 
 // require 项目自定义配置
 const customConfigRequire: ICustomConfigFileExport = fs.existsSync(resolveApp(customConfigFileName))
@@ -22,7 +22,10 @@ if (typeof customConfigRequire === 'function') {
 // 默认的自定义配置信息
 const initCustomConfig: ICustomConfig = {
   port: 666,
-  publicPath: '/'
+  publicPath: '/',
+  alias: {
+    '@': resolveApp('src')
+  },
 };
 
 // 合并默认配置自定义和项目自定义配置
