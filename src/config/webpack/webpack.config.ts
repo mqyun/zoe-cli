@@ -8,7 +8,7 @@ import customConfig from './custom.config';
 import moduleConfig from './module.config';
 
 export default () => {
-  const { mode, isPro } = globalStore;
+  const { mode, isDev, isPro } = globalStore;
   const outputFileName = isPro ? 'static/js/[name].[contenthash:8].js' : 'static/js/bundle.js';
 
   const baseConfig: Configuration = {
@@ -25,14 +25,22 @@ export default () => {
       publicPath: isPro ? customConfig.publicPath : '/'
     },
 
-    module: moduleConfig(),
+    module: moduleConfig,
 
     resolve: {
       extensions: ['.ts', '.tsx', '.js', '.jsx', '.scss', '.less', '.css', '.json'],
       alias: customConfig.alias
     },
 
-    plugins: pluginsConfig
+    plugins: pluginsConfig,
+
+    watchOptions: {
+      aggregateTimeout: 500,
+      poll: 1000,
+      ignored: /node_modules/
+    },
+
+    devtool: customConfig.sourceMap ? 'source-map' : (isDev ? 'cheap-module-source-map' : void 0)
   };
 
   return baseConfig;

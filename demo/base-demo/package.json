@@ -1,0 +1,14 @@
+{
+  "name": "base-demo",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "start": "node ../../lib/bin/cli.js start",
+    "build": "node ../../lib/bin/cli.js build"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "antd": "^4.15.4"
+  }
+}

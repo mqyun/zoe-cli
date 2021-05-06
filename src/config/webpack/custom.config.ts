@@ -26,12 +26,14 @@ const initCustomConfig: ICustomConfig = {
   alias: {
     '@': resolveApp('src')
   },
+  sourceMap: false
 };
 
 // 合并默认配置自定义和项目自定义配置
 const customConfig: ICustomConfig = {
   ...initCustomConfig,
-  ...requireConfig
+  ...requireConfig,
+  sourceMap: globalStore.isDev ? false : (requireConfig.sourceMap ?? initCustomConfig.sourceMap)
 };
 
 export default customConfig;

@@ -19,6 +19,9 @@ export interface ICustomConfig {
 
   /** webpack alias 配置 */
   alias?: Configuration['resolve']['alias'];
+
+  /** 是否生成 map 文件 */
+  sourceMap?: boolean;
 }
 
 /**

@@ -9,8 +9,8 @@ import doPack from '../scripts/do-pack/do-pack';
 const packageInfo = require('../../package.json');
 
 program
-  .version(packageInfo.version)
-  .option('-s --sourcemap', '构建时生成 map 文件');
+  .version(packageInfo.version);
+  // .option('-s --sourcemap', '构建时生成 map 文件');
 
 program
   .command('create')
