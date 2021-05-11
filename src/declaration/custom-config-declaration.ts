@@ -1,6 +1,10 @@
 import { Configuration } from 'webpack';
 import { ModeEnum } from './global-declaration';
 
+interface IKeyValue {
+  [key: string]: string;
+}
+
 /**
  * @description 自定义配置声明
  */
@@ -20,8 +24,20 @@ export interface ICustomConfig {
   /** webpack alias 配置 */
   alias?: Configuration['resolve']['alias'];
 
-  /** 是否生成 map 文件 */
+  /** 是否生成 map 文件，production 下生效 */
   sourceMap?: boolean;
+
+  /** 一些声明 */
+  define?: IKeyValue;
+
+  /** antd 主题样式配置 */
+  antdLessModifyVars?: IKeyValue;
+
+  /** cloud-xinyi 主题样式配置 */
+  cloudXyScssModifyVars?: IKeyValue;
+
+  /** webpack 自定义配置 */
+  webpackConfig?: Configuration;
 }
 
 /**

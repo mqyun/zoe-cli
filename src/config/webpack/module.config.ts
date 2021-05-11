@@ -1,7 +1,6 @@
 import { Configuration } from 'webpack';
 import babelConfig from './babel.config';
 import getStyleLoaders from './utils/get-style-loaders';
-import customConfig from './custom.config';
 
 const regOptions = {
   baseScript: /\.(js|jsx|ts|tsx)$/,
@@ -10,7 +9,8 @@ const regOptions = {
   sassRegex: /\.(scss|sass)$/,
   sassModuleRegex: /\.module\.(scss|sass)$/,
   lessRegex: /\.less$/,
-  lessModuleRegex: /\.module\.less$/
+  lessModuleRegex: /\.module\.less$/,
+  resourceRegex: /\.(png|jpg|jpeg|gif|bmp|ttf|md)$/i
 };
 
 const cssModuleConfig = {
@@ -20,6 +20,21 @@ const cssModuleConfig = {
 
 const moduleConfig: Configuration['module'] = {
   rules: [
+    {
+      parser: {
+        requireEnsure: false,
+      }
+    },
+    {
+      test: regOptions.resourceRegex,
+      type: 'asset/resource'
+    },
+    {
+      test: /\.m?js/,
+      resolve: {
+        fullySpecified: false
+      }
+    },
     {
       oneOf: [
         {

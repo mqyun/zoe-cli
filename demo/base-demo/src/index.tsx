@@ -7,7 +7,7 @@ import App from './App';
 const container = document.getElementById('root');
 
 if (!container) {
-  document.body.innerHTML += '<div id="root"></div>'
+  document.body.innerHTML += '<div id="root"></div>';
 }
 
 ReactDOM.render(<App />, document.getElementById('root'));

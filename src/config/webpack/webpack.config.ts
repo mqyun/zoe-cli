@@ -1,5 +1,8 @@
 import { Configuration } from 'webpack';
 
+import CssMinimizerPlugin from 'css-minimizer-webpack-plugin';
+import TerserPlugin from 'terser-webpack-plugin';
+
 import resolveApp from '../../utils/resolveApp';
 import globalStore from '../global/global-store';
 
@@ -10,6 +13,7 @@ import moduleConfig from './module.config';
 export default () => {
   const { mode, isDev, isPro } = globalStore;
   const outputFileName = isPro ? 'static/js/[name].[contenthash:8].js' : 'static/js/bundle.js';
+  const assetModuleFilename = isPro ? 'static/resource/[name].[hash][ext][query]' : 'static/resource/[name][ext]';
 
   const baseConfig: Configuration = {
     mode,
@@ -22,6 +26,7 @@ export default () => {
       path: resolveApp('build'),
       filename: outputFileName,
       chunkFilename: outputFileName,
+      assetModuleFilename,
       publicPath: isPro ? customConfig.publicPath : '/'
     },
 
@@ -40,7 +45,15 @@ export default () => {
       ignored: /node_modules/
     },
 
-    devtool: customConfig.sourceMap ? 'source-map' : (isDev ? 'cheap-module-source-map' : void 0)
+    devtool: customConfig.sourceMap ? 'source-map' : (isDev ? 'cheap-module-source-map' : void 0),
+
+    optimization: isPro ? {
+      minimize: true,
+      minimizer: [
+        new CssMinimizerPlugin(),
+        new TerserPlugin()
+      ]
+    } : void 0
   };
 
   return baseConfig;

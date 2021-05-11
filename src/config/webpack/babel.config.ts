@@ -10,21 +10,31 @@ const babelConfig = {
       '@babel/preset-env',
       {
         targets: {
-          browsers: ['>0.25%', 'not ie 11', 'not op_mini all'],
-        },
-      },
+          browsers: ['>0.25%', 'not ie 11', 'not op_mini all']
+        }
+      }
     ],
     '@babel/preset-react',
     '@babel/preset-typescript'
   ],
   plugins: [
     [
+      require.resolve('babel-plugin-named-asset-import'),
+      {
+        loaderMap: {
+          svg: {
+            ReactComponent: '@svgr/webpack?-svgo,+ref![path]'
+          }
+        }
+      }
+    ],
+    [
       'import',
       {
         libraryName: 'antd',
         libraryDirectory: 'es',
         style: true
-      },
+      }
     ],
     [
       'import',
@@ -38,17 +48,25 @@ const babelConfig = {
     [
       '@babel/plugin-transform-runtime',
       {
-        corejs: 3,
-        helpers: true,
-        regenerator: true,
-        useESModules: true
+        absoluteRuntime: false,
+        corejs: {
+          version: 3,
+          proposals: true
+        },
+        version: '^7.14.0'
       }
+      // {
+      //   corejs: 3,
+      //   helpers: true,
+      //   regenerator: true,
+      //   useESModules: true
+      // }
     ],
     [
       '@babel/plugin-proposal-decorators',
       {
-        legacy: true,
-      },
+        legacy: true
+      }
     ],
     '@babel/plugin-syntax-dynamic-import',
     '@babel/plugin-transform-async-to-generator',
