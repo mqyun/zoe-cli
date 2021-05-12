@@ -16,6 +16,7 @@ import customConfig from './custom.config';
 import getCustomArgv from '../../utils/getCustomArgv';
 
 const htmlTemplate = fs.existsSync(resolveApp('public/index.html'));
+const publicExists = fs.existsSync(resolveApp('public'));
 
 const packageInfo = require('../../../package.json');
 const { isDev, isPro } = globalStore;
@@ -76,7 +77,7 @@ const pluginsConfig: Configuration['plugins'] = [
     filename: 'static/css/[name].[contenthash:8].css',
     chunkFilename: 'static/css/[name].[contenthash:8].chunk.css'
   }),
-  isPro && new CopyWebpackPlugin({
+  isPro && publicExists && new CopyWebpackPlugin({
     patterns: [
       {
         from: resolveApp('public'),
@@ -92,7 +93,13 @@ const pluginsConfig: Configuration['plugins'] = [
       env: {
         mode: JSON.stringify(globalStore.mode),
         NODE_ENV: JSON.stringify(globalStore.mode),
-        ...customArgv
+        ...(() => {
+          let list = {};
+          for (let [k, v] of Object.entries(customArgv)) {
+            list[k] = JSON.stringify(v);
+          }
+          return list;
+        })()
       }
     },
     ...customConfig.define

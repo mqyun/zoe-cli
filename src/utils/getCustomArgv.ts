@@ -5,7 +5,7 @@ function getCustomArgv(list = process.argv) {
     if (item.startsWith('custom.')) {
       const str = item.replace('custom.', '');
       const strList = str.split('=');
-      res[strList[0]] = JSON.stringify(strList[1]);
+      res[strList[0]] = strList[1];
     }
   });
 

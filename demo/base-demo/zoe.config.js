@@ -1,15 +1,19 @@
-module.exports = {
-  port: 888,
+module.exports = function (params) {
+  console.log('params:', params);
 
-  publicPath: '/base-demo',
+  return {
+    port: 888,
 
-  sourceMap: true,
+    publicPath: '/base-demo',
 
-  antdLessModifyVars: {
-    'primary-color': '#ff7300'
-  },
+    sourceMap: true,
 
-  cloudXyScssModifyVars: {
-    'xy-primary-color': '#c22996'
-  },
-};
+    antdLessModifyVars: {
+      'primary-color': '#ff7300'
+    },
+
+    cloudXyScssModifyVars: {
+      'xy-primary-color': '#c22996'
+    }
+  };
+}

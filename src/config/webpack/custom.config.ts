@@ -5,6 +5,7 @@ import { customConfigFileName } from '../global/global-config';
 import { ICustomConfig, ICustomConfigFileExport } from '../../declaration/custom-config-declaration';
 import globalStore from '../global/global-store';
 import getCustomArgv from '../../utils/getCustomArgv';
+const customArgv = getCustomArgv();
 
 // require 项目自定义配置
 const customConfigRequire: ICustomConfigFileExport = fs.existsSync(resolveApp(customConfigFileName))
@@ -15,6 +16,7 @@ if (typeof customConfigRequire === 'function') {
   // 项目自定义配置是个方法
   requireConfig = customConfigRequire({
     mode: globalStore.mode,
+    ...customArgv
   });
 } else {
   requireConfig = customConfigRequire;

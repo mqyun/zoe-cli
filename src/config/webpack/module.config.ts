@@ -22,7 +22,7 @@ const moduleConfig: Configuration['module'] = {
   rules: [
     {
       parser: {
-        requireEnsure: false,
+        requireEnsure: false
       }
     },
     {

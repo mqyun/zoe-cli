@@ -23,7 +23,7 @@ const getStyleLoaders = (options: IGetStyleLoadersOptions) => {
       loader: require.resolve('css-loader'),
       options: {
         sourceMap,
-        ...cssLoaderOptions,
+        ...cssLoaderOptions
       }
     },
     {
@@ -35,15 +35,15 @@ const getStyleLoaders = (options: IGetStyleLoadersOptions) => {
             require('postcss-flexbugs-fixes'),
             require('postcss-preset-env')({
               autoprefixer: {
-                flexbox: 'no-2009',
+                flexbox: 'no-2009'
               },
-              stage: 3,
+              stage: 3
             })
-          ].filter(Boolean),
+          ].filter(Boolean)
         },
         sourceMap
-      },
-    },
+      }
+    }
   ].filter(Boolean);
   if (preProcessor) {
     if (preProcessor === 'less-loader') {
@@ -53,7 +53,7 @@ const getStyleLoaders = (options: IGetStyleLoadersOptions) => {
           sourceMap,
           lessOptions: {
             modifyVars: {
-              ...customConfig.antdLessModifyVars,
+              ...customConfig.antdLessModifyVars
             },
             javascriptEnabled: true
           }

@@ -13,8 +13,8 @@ export const promptList = [
     message: '语言：',
     name: 'language',
     choices: ['TypeScript', 'JavaScript'],
-    filter: (val) => val.toLowerCase(),
-  },
+    filter: (val) => val.toLowerCase()
+  }
 ];
 
 /**
@@ -35,7 +35,7 @@ export const getCmdStr = (params: {
     'rm -rf .gitmodules',
     'rm -rf @xy-lib',
     'git init',
-    `git submodule add ${projectTemplateGitUrlList.xyLibSubmoduleGitUrl} ./@xy-lib`,
+    `git submodule add ${projectTemplateGitUrlList.xyLibSubmoduleGitUrl} ./@xy-lib`
   ];
 
   return cmdStrList.join(' && ');

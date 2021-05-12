@@ -2,6 +2,7 @@ import { Configuration } from 'webpack';
 
 import CssMinimizerPlugin from 'css-minimizer-webpack-plugin';
 import TerserPlugin from 'terser-webpack-plugin';
+import { merge } from 'webpack-merge';
 
 import resolveApp from '../../utils/resolveApp';
 import globalStore from '../global/global-store';
@@ -56,5 +57,5 @@ export default () => {
     } : void 0
   };
 
-  return baseConfig;
+  return customConfig.webpackConfig ? merge(baseConfig, customConfig.webpackConfig) : baseConfig;
 };
