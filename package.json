@@ -4,9 +4,6 @@
   "bin": {
     "zoeCli": "./lib/bin/cli.js"
   },
-  "scripts": {
-    "test": "node ./lib/bin/cli.js"
-  },
   "description": "",
   "main": "index.js",
   "author": "mqyun",
