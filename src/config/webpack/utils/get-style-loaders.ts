@@ -52,13 +52,22 @@ const getStyleLoaders = (options: IGetStyleLoadersOptions) => {
         options: {
           sourceMap,
           lessOptions: {
-            javascriptEnabled: true,
+            modifyVars: {
+              ...customConfig.antdLessModifyVars,
+            },
+            javascriptEnabled: true
           }
         }
       });
     } else if (preProcessor === 'sass-loader') {
+      const styleVariables = customConfig.cloudXyScssModifyVars;
       loaders.push({
-        loader: require.resolve(preProcessor)
+        loader: require.resolve(preProcessor),
+        options: {
+          additionalData: Object.keys(styleVariables)
+            .map((k) => `$${k}: ${styleVariables[k]};`)
+            .join('\n')
+        }
       });
     } else {
       loaders.push({

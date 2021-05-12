@@ -1,3 +1,5 @@
+import fs from 'fs';
+
 import webpack, { Configuration } from 'webpack';
 import WebpackBar from 'webpackbar';
 import { CleanWebpackPlugin } from 'clean-webpack-plugin';
@@ -11,21 +13,45 @@ import CopyWebpackPlugin from 'copy-webpack-plugin';
 import globalStore from '../global/global-store';
 import resolveApp from '../../utils/resolveApp';
 import customConfig from './custom.config';
-import getCustomArgv from "../../utils/getCustomArgv";
+import getCustomArgv from '../../utils/getCustomArgv';
+
+const htmlTemplate = fs.existsSync(resolveApp('public/index.html'));
 
 const packageInfo = require('../../../package.json');
 const { isDev, isPro } = globalStore;
 
 const customArgv = getCustomArgv();
 
+// html-webpack-plugin 模板配置
+let htmlWebpackPluginTemplate = {};
+if (htmlTemplate) {
+  htmlWebpackPluginTemplate = {
+    template: htmlTemplate ? resolveApp('public/index.html') : void 0
+  };
+}
+
+// html-webpack-plugin 自定义参数
+const htmlWebpackPluginCustomParams: {
+  publicPath: string;
+} = {
+  publicPath: isPro ? customConfig.publicPath : ''
+};
+
+// @ts-ignore
 const pluginsConfig: Configuration['plugins'] = [
   new WebpackBar({
     name: `${packageInfo.name} building…`,
     color: '#1890FF'
   }),
-  new CleanWebpackPlugin(),
+  isPro && new CleanWebpackPlugin({
+    cleanOnceBeforeBuildPatterns: [resolveApp('build')]
+  }),
   new HtmlWebpackPlugin({
-    title: 'zoe app'
+    title: customConfig.title,
+    templateParameters: {
+      customParams: htmlWebpackPluginCustomParams
+    },
+    ...htmlWebpackPluginTemplate
   }),
   new ESLintPlugin({
     eslintPath: require.resolve('eslint'),
@@ -50,13 +76,17 @@ const pluginsConfig: Configuration['plugins'] = [
     filename: 'static/css/[name].[contenthash:8].css',
     chunkFilename: 'static/css/[name].[contenthash:8].chunk.css'
   }),
-  isPro && new CopyWebpackPlugin([
-    {
-      from: resolveApp('public'),
-      to: '.',
-      ignore: ['index.html'],
-    },
-  ]),
+  isPro && new CopyWebpackPlugin({
+    patterns: [
+      {
+        from: resolveApp('public'),
+        to: '.',
+        globOptions: {
+          ignore: ['**/index.html']
+        },
+      },
+    ],
+  }),
   new webpack.DefinePlugin({
     process: {
       env: {
@@ -66,7 +96,10 @@ const pluginsConfig: Configuration['plugins'] = [
       }
     },
     ...customConfig.define
-  })
+  }),
+  customConfig.moduleFederationConfig &&
+    // @ts-ignore
+    webpack.container.ModuleFederationPlugin(customConfig.moduleFederationConfig)
 ].filter(Boolean);
 
 export default pluginsConfig;

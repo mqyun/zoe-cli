@@ -4,7 +4,8 @@
   "description": "",
   "scripts": {
     "start": "node ../../lib/bin/cli.js start custom.project=baseDemo",
-    "pro": "node ../../lib/bin/cli.js build"
+    "pro": "node ../../lib/bin/cli.js build",
+    "sync": "node ../../lib/bin/cli.js sync"
   },
   "author": "",
   "license": "ISC",
@@ -13,6 +14,7 @@
     "@types/react-dom": "^17.0.3",
     "@types/react-router-dom": "^5.1.7",
     "antd": "^4.15.4",
+    "cloud-xinyi": "^3.3.5",
     "react": "17.0.1",
     "react-dom": "17.0.1",
     "react-router-dom": "^5.2.0"

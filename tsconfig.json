@@ -18,6 +18,8 @@
     "lib": ["es5", "es6", "es7", "esnext", "dom", "dom.iterable", "scripthost"],
     "allowUnreachableCode": false
   },
-  "include": ["./src/**/*"],
+  "include": [
+    "./src/**/*"
+  ],
   "exclude": ["node_modules"]
 }

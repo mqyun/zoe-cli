@@ -5,6 +5,7 @@ import program from 'commander';
 import createProject from '../scripts/create-project/create-project';
 import { ModeEnum } from '../declaration/global-declaration';
 import doPack from '../scripts/do-pack/do-pack';
+import sync from '../scripts/sync/sync';
 
 const packageInfo = require('../../package.json');
 
@@ -37,6 +38,13 @@ program
     doPack({
       mode: ModeEnum.PRO
     });
+  });
+
+program
+  .command('sync')
+  .description('同步配置')
+  .action(() => {
+    sync();
   });
 
 program.parse(process.argv);

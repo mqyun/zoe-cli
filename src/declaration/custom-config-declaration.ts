@@ -12,6 +12,9 @@ export interface ICustomConfig {
   /** 端口号 */
   port?: number;
 
+  /** html 标题 */
+  title?: string;
+
   /** webpack 的 publicPath */
   publicPath?: string;
 
@@ -38,6 +41,9 @@ export interface ICustomConfig {
 
   /** webpack 自定义配置 */
   webpackConfig?: Configuration;
+
+  /** moduleFederationConfig */
+  moduleFederationConfig?: any;
 }
 
 /**

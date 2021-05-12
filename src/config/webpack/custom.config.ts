@@ -4,7 +4,7 @@ import resolveApp from '../../utils/resolveApp';
 import { customConfigFileName } from '../global/global-config';
 import { ICustomConfig, ICustomConfigFileExport } from '../../declaration/custom-config-declaration';
 import globalStore from '../global/global-store';
-import getCustomArgv from "../../utils/getCustomArgv";
+import getCustomArgv from '../../utils/getCustomArgv';
 
 // require 项目自定义配置
 const customConfigRequire: ICustomConfigFileExport = fs.existsSync(resolveApp(customConfigFileName))
@@ -23,6 +23,7 @@ if (typeof customConfigRequire === 'function') {
 // 默认的自定义配置信息
 const initCustomConfig: ICustomConfig = {
   port: 666,
+  title: 'zoe app',
   publicPath: '/',
   alias: {
     '@': resolveApp('src')
