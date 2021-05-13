@@ -28,7 +28,8 @@ export default (params: IDoPackParams) => {
       useLocalIp: true,
       overlay: true,
       stats: 'errors-only',
-      // open: true
+      open: true,
+      ...customConfig.devServerOption
     };
     const compiler = webpack(config);
     const server = new WebpackDevServer(compiler, devServerOptions);
